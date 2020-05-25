@@ -20,7 +20,7 @@ const Login = (props) => {
       });
 
       if (result.type === "success") {
-        console.log("LoginScreen.js.js 21 | ", result);
+        // console.log("LoginScreen.js.js 21 | ", result);
         props.navigation.navigate("Stores");
         return result.accessToken;
       } else {

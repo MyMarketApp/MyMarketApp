@@ -1,11 +1,32 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { Component, useEffect, useState } from "react";
+import { StyleSheet, View, Text, ScrollView, Image } from "react-native";
 import Button from "react-native-button";
+import ajax from "../services/Routes";
 
 const Stores = (props) => {
+  const [stores, Stores] = useState([]);
+  useEffect(() => {
+    async function retrieveStores() {
+      const response = await ajax.allStores();
+      await Stores(response.body);
+    }
+    retrieveStores();
+  }, []);
+
   return (
     <View style={styles.Stores}>
-      <Text>STORES</Text>
+      <ScrollView>
+        {stores.map((s, i) => (
+          <View>
+            <Image
+              style={{ width: 300, height: 200 }}
+              source={{ uri: s.imageUrl }}
+            />
+            <Text>{s.name}</Text>
+            <Text>{s.direction}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -13,8 +34,9 @@ const Stores = (props) => {
 const styles = StyleSheet.create({
   Stores: {
     backgroundColor: "blue",
-    alignItems: "center",
+    marginTop: 50,
     flex: 1,
+    alignItems: "center",
     justifyContent: "center",
   },
 });

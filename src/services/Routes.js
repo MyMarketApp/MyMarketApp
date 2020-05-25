@@ -4,15 +4,15 @@ const postRequestOptions = {
   method: "POST",
   headers: { "Content-Type": "application/json" },
 };
-const gestRequestOptions = {
+const getRequestOptions = {
   method: "GET",
   headers: { "Content-Type": "application/json" },
 };
 
 export default {
-  async allStores(email, password) {
+  async allStores() {
     try {
-      let response = await fetch(URI + "/api/Store/all", gestRequestOptions);
+      let response = await fetch(URI + "/api/Store/all", getRequestOptions);
       let responseJsonData = await response.json();
       return responseJsonData;
     } catch (e) {
