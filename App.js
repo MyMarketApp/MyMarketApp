@@ -3,9 +3,9 @@ import { Text, View } from "react-native";
 import Login from "./src/screens/Login";
 import Register from "./src/screens/Register";
 import Presentation from "./src/screens/Presentation";
-import Stores from "./src/screens/Stores";
-import StoresLocation from "./src/screens/StoresLocation";
+
 import RegisterLocation from "./src/screens/RegisterLocation";
+import Main from "./src/screens/Main";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -38,13 +38,6 @@ function App() {
           }}
         />
         <Stack.Screen
-          name="Stores"
-          component={Stores}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
           name="Login"
           component={Login}
           options={{
@@ -52,8 +45,8 @@ function App() {
           }}
         />
         <Stack.Screen
-          name="StoresLocation"
-          component={StoresLocation}
+          name="Main"
+          component={Main}
           options={{
             headerShown: false,
           }}

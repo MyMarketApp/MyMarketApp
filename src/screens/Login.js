@@ -21,7 +21,7 @@ const Login = (props) => {
 
       if (result.type === "success") {
         // console.log("LoginScreen.js.js 21 | ", result);
-        props.navigation.navigate("Stores");
+        props.navigation.navigate("Main");
         return result.accessToken;
       } else {
         return { cancelled: true };
@@ -33,7 +33,7 @@ const Login = (props) => {
   };
   const verifyLogin = async (email, password) => {
     const response = await ajax.getUser(email, password);
-    if (response.status && response.body) props.navigation.navigate("Stores");
+    if (response.status && response.body) props.navigation.navigate("Main");
     else alert("GG");
   };
   return (
