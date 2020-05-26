@@ -1,22 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 
 import ajax from "../services/Routes";
 import Button from "react-native-button";
 
-const Register = (props) => {
+const Register = ({ props, route, navigation }) => {
   const [email, Email] = useState("");
   const [password, Password] = useState("");
   const [name, Name] = useState("");
   const [lastName, LastName] = useState("");
   const [phone, Phone] = useState("");
+  const [adress, Adress] = useState("");
+  const [coordinate, Coordinate] = useState(null);
+
+  useEffect(() => {
+    if (route.params?.coordinate) {
+      Coordinate(route.params?.coordinate);
+    }
+  }, [route.params?.coordinate]);
 
   const register = async () => {
-    const response = await ajax.addUser(email, password, name, lastName, phone);
+    const response = await ajax.addUser(
+      email,
+      password,
+      name,
+      lastName,
+      phone,
+      coordinate,
+      adress
+    );
+    alert(response.message);
     if (response.status && response.body) {
-      alert(response.message);
-      props.navigation.navigate("Login");
+      navigation.navigate("Login");
     } else alert("GG");
+  };
+
+  const getCoordinate = async () => {
+    navigation.navigate("RegisterLocation");
   };
 
   return (
@@ -47,6 +67,18 @@ const Register = (props) => {
           onChangeText={(email) => Email(email)}
           value={email}
         />
+      </View>
+      <View style={styles.InputRow}>
+        {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
+        <TextInput
+          style={styles.button}
+          placeholder="Direccion"
+          onChangeText={(adress) => Adress(adress)}
+          value={adress}
+        />
+        <Button style={styles.DirecctionButton} onPress={getCoordinate}>
+          MAP
+        </Button>
       </View>
       <View style={styles.InputRow}>
         {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
@@ -95,6 +127,16 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     color: "white",
     borderRadius: 10,
+  },
+  DirecctionButton: {
+    backgroundColor: "#fff",
+    textAlignVertical: "center",
+    color: "green",
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 10,
+    height: 50,
+    width: 60,
   },
   Button: {
     backgroundColor: "#fff",

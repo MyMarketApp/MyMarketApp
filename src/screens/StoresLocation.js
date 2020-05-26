@@ -11,10 +11,7 @@ const StoresLocation = ({ props, route, navigation }) => {
     latitudeDelta: 0.095,
     longitudeDelta: 0.045,
   });
-  // const [markerIni, MarkerIni] = useState({
-  //   latitude: parseFloat(store.latitude),
-  //   longitude: parseFloat(store.longitude),
-  // });
+
   return (
     <View style={styles.container}>
       <MapView style={styles.mapStyle} initialRegion={posIni}>
@@ -30,14 +27,6 @@ const StoresLocation = ({ props, route, navigation }) => {
             image={require("../../assets/PinMarket.png")}
           />
         ))}
-        {/* <Marker
-          draggable
-          coordinate={markerIni}
-          onDragEnd={(e) => MarkerIni(e.nativeEvent.coordinate)}
-          title={store.name}
-          description={store.direction}
-          image={require("../../assets/PinMarket.png")}
-        /> */}
       </MapView>
     </View>
   );

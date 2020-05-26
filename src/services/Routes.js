@@ -29,7 +29,7 @@ export default {
       console.log(e);
     }
   },
-  async addUser(email, password, name, lastName, phone) {
+  async addUser(email, password, name, lastName, phone, coordinate, adress) {
     try {
       postRequestOptions.body = JSON.stringify({
         email,
@@ -37,6 +37,8 @@ export default {
         name,
         lastName,
         phone,
+        coordinate,
+        adress,
       });
       let response = await fetch(URI + "/api/User/add", postRequestOptions);
       let responseJsonData = await response.json();

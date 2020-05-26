@@ -5,6 +5,7 @@ import Register from "./src/screens/Register";
 import Presentation from "./src/screens/Presentation";
 import Stores from "./src/screens/Stores";
 import StoresLocation from "./src/screens/StoresLocation";
+import RegisterLocation from "./src/screens/RegisterLocation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -17,6 +18,13 @@ function App() {
         <Stack.Screen
           name="Presentation"
           component={Presentation}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="RegisterLocation"
+          component={RegisterLocation}
           options={{
             headerShown: false,
           }}
