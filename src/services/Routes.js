@@ -19,17 +19,29 @@ export default {
       console.log(e);
     }
   },
-  async getUser(email, password) {
+  async loginUser(email, password) {
     try {
       postRequestOptions.body = JSON.stringify({ email, password });
-      let response = await fetch(URI + "/api/User/get", postRequestOptions);
+      let response = await fetch(URI + "/api/User/login", postRequestOptions);
       let responseJsonData = await response.json();
       return responseJsonData;
     } catch (e) {
       console.log(e);
     }
   },
-  async addUser(email, password, name, lastName, phone, coordinate, adress) {
+  async verifyUser(email) {
+    try {
+      let response = await fetch(
+        URI + "/api/User/" + email + "/verify",
+        getRequestOptions
+      );
+      let responseJsonData = await response.json();
+      return responseJsonData;
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  async addUser(email, password, name, lastName, phone, coordinates, adress) {
     try {
       postRequestOptions.body = JSON.stringify({
         email,
@@ -37,7 +49,7 @@ export default {
         name,
         lastName,
         phone,
-        coordinate,
+        coordinates,
         adress,
       });
       let response = await fetch(URI + "/api/User/add", postRequestOptions);

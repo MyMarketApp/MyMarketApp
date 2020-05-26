@@ -40,7 +40,7 @@ const RegisterLocation = ({ props, route, navigation }) => {
 
   const ready = () => {
     navigation.navigate("Register", {
-      coordinate: markerIni,
+      coordinates: markerIni,
     });
   };
 

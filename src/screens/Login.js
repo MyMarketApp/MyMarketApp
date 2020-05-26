@@ -20,21 +20,33 @@ const Login = (props) => {
       });
 
       if (result.type === "success") {
-        // console.log("LoginScreen.js.js 21 | ", result);
-        props.navigation.navigate("Main");
-        return result.accessToken;
+        const verifyUser = await ajax.verifyUser(result.user.email);
+        if (verifyUser.status) props.navigation.navigate("Main");
+        else {
+          const createUser = await ajax.addUser(
+            result.user.email,
+            null,
+            result.user.name,
+            result.user.familyName,
+            null,
+            null,
+            null
+          );
+          if (createUser.status) props.navigation.navigate("Main");
+        }
+        console.log("LoginScreen.js.js 21 | ", result);
+        // result.accessToken;
       } else {
-        return { cancelled: true };
+        alert("GG");
       }
     } catch (e) {
       console.log("LoginScreen.js.js 30 | Error with login", e);
-      return { error: true };
     }
   };
   const verifyLogin = async (email, password) => {
-    const response = await ajax.getUser(email, password);
-    if (response.status && response.body) props.navigation.navigate("Main");
-    else alert("GG");
+    const response = await ajax.loginUser(email, password);
+    alert(response.message);
+    if (response.status) props.navigation.navigate("Main");
   };
   return (
     <View style={styles.Login}>

@@ -19,20 +19,21 @@ const Profile = ({ props, route, navigation }) => {
     }
   }, [route.params?.coordinate]);
 
-  const register = async () => {
-    const response = await ajax.addUser(
-      email,
-      password,
-      name,
-      lastName,
-      phone,
-      coordinate,
-      adress
-    );
-    alert(response.message);
-    if (response.status && response.body) {
-      // navigation.navigate("Login");
-    } else alert("GG");
+  const update = async () => {
+    alert("update");
+    // const response = await ajax.updateUser(
+    //   email,
+    //   password,
+    //   name,
+    //   lastName,
+    //   phone,
+    //   coordinate,
+    //   adress
+    // );
+    // alert(response.message);
+    // if (response.status && response.body) {
+    //   // navigation.navigate("Login");
+    // } else alert("GG");
   };
 
   const getCoordinate = async () => {
@@ -62,6 +63,7 @@ const Profile = ({ props, route, navigation }) => {
       <View style={styles.InputRow}>
         {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
         <TextInput
+          editable={false}
           style={styles.button}
           placeholder="Correo Electronico"
           onChangeText={(email) => Email(email)}
@@ -99,7 +101,7 @@ const Profile = ({ props, route, navigation }) => {
         />
       </View>
       <View style={styles.InputRow}>
-        <Button style={styles.Button} onPress={register}>
+        <Button style={styles.Button} onPress={update}>
           ACTUALIZAR
         </Button>
       </View>

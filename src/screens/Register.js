@@ -11,13 +11,13 @@ const Register = ({ props, route, navigation }) => {
   const [lastName, LastName] = useState("");
   const [phone, Phone] = useState("");
   const [adress, Adress] = useState("");
-  const [coordinate, Coordinate] = useState(null);
+  const [coordinates, Coordinates] = useState(null);
 
   useEffect(() => {
-    if (route.params?.coordinate) {
-      Coordinate(route.params?.coordinate);
+    if (route.params?.coordinates) {
+      Coordinates(route.params?.coordinates);
     }
-  }, [route.params?.coordinate]);
+  }, [route.params?.coordinates]);
 
   const register = async () => {
     const response = await ajax.addUser(
@@ -26,13 +26,11 @@ const Register = ({ props, route, navigation }) => {
       name,
       lastName,
       phone,
-      coordinate,
+      coordinates,
       adress
     );
     alert(response.message);
-    if (response.status && response.body) {
-      navigation.navigate("Login");
-    } else alert("GG");
+    if (response.status) navigation.navigate("Login");
   };
 
   const getCoordinate = async () => {

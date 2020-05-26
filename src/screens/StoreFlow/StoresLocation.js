@@ -6,8 +6,8 @@ const StoresLocation = ({ props, route, navigation }) => {
   const { stores } = route.params;
   const { store } = route.params;
   const [posIni, PosIni] = useState({
-    latitude: store.coordinate.latitude,
-    longitude: store.coordinate.longitude,
+    latitude: store.coordinates.latitude,
+    longitude: store.coordinates.longitude,
     latitudeDelta: 0.095,
     longitudeDelta: 0.045,
   });
@@ -19,8 +19,8 @@ const StoresLocation = ({ props, route, navigation }) => {
           <Marker
             key={s.id}
             coordinate={{
-              latitude: s.coordinate.latitude,
-              longitude: s.coordinate.longitude,
+              latitude: s.coordinates.latitude,
+              longitude: s.coordinates.longitude,
             }}
             title={s.name}
             description={s.direction}
