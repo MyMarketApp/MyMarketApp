@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Button from "react-native-button";
-import ajax from "../services/Routes";
+import ajax from "../../services/Routes";
 
 const Stores = (props) => {
   const [stores, Stores] = useState([]);

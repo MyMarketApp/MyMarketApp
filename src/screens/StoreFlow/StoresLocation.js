@@ -24,7 +24,7 @@ const StoresLocation = ({ props, route, navigation }) => {
             }}
             title={s.name}
             description={s.direction}
-            image={require("../../assets/PinMarket.png")}
+            image={require("../../../assets/PinMarket.png")}
           />
         ))}
       </MapView>
