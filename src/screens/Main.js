@@ -2,7 +2,8 @@ import * as React from "react";
 import { Button, View } from "react-native";
 import Stores from "./StoreFlow/Stores";
 import StoresLocation from "./StoreFlow/StoresLocation";
-import Profile from "./Profile";
+import Profile from "./ProfileFlow/Profile";
+import ProfileLocation from "./ProfileFlow/ProfileLocation";
 import MyOrders from "./MyOrders";
 import ContactUs from "./ContactUs";
 import Promotions from "./Promotions";
@@ -34,15 +35,66 @@ function StoreFlow() {
   );
 }
 
+function ProfileFlow() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="ProfileLocation"
+        component={ProfileLocation}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function Main() {
   return (
     <NavigationContainer independent={true}>
       <Drawer.Navigator initialRouteName="StoreFlow">
-        <Drawer.Screen name="StoreFlow" component={StoreFlow} />
-        <Drawer.Screen name="Profile" component={Profile} />
-        <Drawer.Screen name="MyOrders" component={MyOrders} />
-        <Drawer.Screen name="ContactUs" component={ContactUs} />
-        <Drawer.Screen name="Promotions" component={Promotions} />
+        <Drawer.Screen
+          name="ProfileFlow"
+          component={ProfileFlow}
+          options={{
+            title: "Mi cuenta",
+          }}
+        />
+        <Drawer.Screen
+          name="Promotions"
+          component={Promotions}
+          options={{
+            title: "Promociones",
+          }}
+        />
+        <Drawer.Screen
+          name="StoreFlow"
+          component={StoreFlow}
+          options={{
+            title: "Tiendas",
+          }}
+        />
+        <Drawer.Screen
+          name="MyOrders"
+          component={MyOrders}
+          options={{
+            title: "Mis Pedidos",
+          }}
+        />
+        <Drawer.Screen
+          name="ContactUs"
+          component={ContactUs}
+          options={{
+            title: "Contactano",
+          }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
