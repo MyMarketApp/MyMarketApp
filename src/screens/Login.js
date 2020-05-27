@@ -4,11 +4,23 @@ import Button from "react-native-button";
 import LoginInput from "../components/LoginInput";
 import ajax from "../services/Routes";
 import * as Google from "expo-google-app-auth";
-
+import { connect } from "react-redux";
 const IOS_CLIENT_ID =
   "421984500214-2v08hjd6s9budpcfdhpblt7dfae90thu.apps.googleusercontent.com";
 const ANDROID_CLIENT_ID =
   "421984500214-mas44cslkk85en2g7vvo9qeo20gtoloh.apps.googleusercontent.com";
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setUser: (user) => dispatch({ type: "SetUser", user }),
+  };
+}
 
 const Login = (props) => {
   const signInWithGoogle = async () => {
@@ -21,8 +33,10 @@ const Login = (props) => {
 
       if (result.type === "success") {
         const verifyUser = await ajax.verifyUser(result.user.email);
-        if (verifyUser.status) props.navigation.navigate("Main");
-        else {
+        if (verifyUser.status) {
+          props.setUser(verifyUser.body);
+          props.navigation.navigate("Main", { user: verifyUser.body });
+        } else {
           const createUser = await ajax.addUser(
             result.user.email,
             null,
@@ -32,9 +46,12 @@ const Login = (props) => {
             null,
             null
           );
-          if (createUser.status) props.navigation.navigate("Main");
+          if (createUser.status) {
+            setUser(createUser.body);
+            props.navigation.navigate("Main", { user: verifyUser.body });
+          }
         }
-        console.log("LoginScreen.js.js 21 | ", result);
+        // console.log("LoginScreen.js.js 21 | ", result);
         // result.accessToken;
       } else {
         alert("GG");
@@ -103,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

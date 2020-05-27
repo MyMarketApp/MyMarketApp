@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
-
+import { connect } from "react-redux";
 import ajax from "../../services/Routes";
 import Button from "react-native-button";
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setUser: () => dispatch({ type: "SetUser", user: "gg" }),
+  };
+}
 
 const Profile = ({ props, route, navigation }) => {
   const [email, Email] = useState("");
@@ -21,6 +33,7 @@ const Profile = ({ props, route, navigation }) => {
 
   const update = async () => {
     alert("update");
+    console.log(props);
     // const response = await ajax.updateUser(
     //   email,
     //   password,
@@ -156,4 +169,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
