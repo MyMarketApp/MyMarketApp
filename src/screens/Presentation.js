@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   Presentation: {
     justifyContent: "center",
     flex: 1,
-    backgroundColor: "blue",
+    backgroundColor: "#3F51B5",
     alignItems: "center",
   },
   Description: {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   Buttons: {
     justifyContent: "space-evenly",
     flex: 0.4,
-    backgroundColor: "blue",
+    // backgroundColor: "blue",
     alignItems: "center",
   },
   Button: {

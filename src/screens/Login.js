@@ -90,7 +90,7 @@ const Login = (props) => {
 const styles = StyleSheet.create({
   Login: {
     flex: 1,
-    backgroundColor: "blue",
+    backgroundColor: "#3F51B5",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -100,19 +100,19 @@ const styles = StyleSheet.create({
   Header: {
     width: "100%",
     flex: 1,
-    backgroundColor: "blue",
+    // backgroundColor: "blue",
     alignItems: "center",
     justifyContent: "center",
   },
   Footer: {
     width: "100%",
     flex: 0.4,
-    backgroundColor: "blue",
+    // backgroundColor: "blue",
     alignItems: "center",
     paddingTop: 20,
   },
   Button: {
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     textAlignVertical: "center",
     color: "green",
     borderColor: "white",

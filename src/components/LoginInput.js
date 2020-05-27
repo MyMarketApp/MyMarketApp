@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     flex: 0.5,
-    backgroundColor: "blue",
+    // backgroundColor: "blue",
     alignItems: "center",
   },
 });
