@@ -126,7 +126,7 @@ const Profile = ({ props, route, navigation }) => {
 const styles = StyleSheet.create({
   Register: {
     flex: 1,
-    backgroundColor: "blue",
+    backgroundColor: "#3F51B5",
     alignItems: "center",
   },
   InputRow: {
