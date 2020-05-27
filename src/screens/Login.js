@@ -63,7 +63,10 @@ const Login = (props) => {
   const verifyLogin = async (email, password) => {
     const response = await ajax.loginUser(email, password);
     alert(response.message);
-    if (response.status) props.navigation.navigate("Main");
+    if (response.status) {
+      setUser(response.body);
+      props.navigation.navigate("Main", { user: response.body });
+    }
   };
   return (
     <View style={styles.Login}>

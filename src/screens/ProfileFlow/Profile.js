@@ -3,6 +3,7 @@ import { StyleSheet, View, TextInput } from "react-native";
 import { connect } from "react-redux";
 import ajax from "../../services/Routes";
 import Button from "react-native-button";
+import { Container, Content, Header, Body, Icon, Left } from "native-base";
 
 function mapStateToProps(state) {
   return {

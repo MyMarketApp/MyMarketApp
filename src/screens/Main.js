@@ -63,14 +63,10 @@ function ProfileFlow() {
 const Main = ({ props, route }) => {
   const { user } = route.params;
   useEffect(() => {
-    console.log("buah props");
     console.log(user);
   }, []);
   const CustomMainDrawerContent = (props) => {
-    useEffect(() => {
-      console.log("state user");
-      console.log(props.user);
-    }, []);
+    useEffect(() => {}, []);
     return (
       <Container>
         <Header style={{ justifyContent: "center" }}>
