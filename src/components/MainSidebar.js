@@ -22,7 +22,6 @@ const MainSidebar = (props) => {
           <View
             style={{
               flexDirection: "row",
-              overflow: "hidden",
             }}
           >
             <Image
@@ -32,8 +31,8 @@ const MainSidebar = (props) => {
             <Text
               style={{
                 paddingTop: 8,
+                paddingLeft: 5,
                 fontSize: 20,
-                overflow: "hidden",
               }}
             >
               {user.name.length < 14

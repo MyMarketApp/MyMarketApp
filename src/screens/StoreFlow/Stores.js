@@ -7,12 +7,12 @@ import {
   Image,
   TouchableHighlight,
   TouchableOpacity,
+  Title,
 } from "react-native";
 
 import Button from "react-native-button";
 import ajax from "../../services/Routes";
-// import { Header } from "react-native/Libraries/NewAppScreen";
-import { Header, Right, Icon, Left } from "native-base";
+import { Header, Body, Right, Icon, Left } from "native-base";
 
 const Stores = (props) => {
   const [stores, Stores] = useState([]);
@@ -26,11 +26,23 @@ const Stores = (props) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Header style={{ justifyContent: "center" }}>
-        <Text style={{ fontSize: 20, paddingTop: 12 }}>TIENDAS</Text>
-        {/* <Left>
-          <Icon name="menu"></Icon>
-        </Left> */}
+      <Header>
+        <Left>
+          <Icon
+            name="menu"
+            onPress={() => props.navigation.openDrawer()}
+          ></Icon>
+        </Left>
+        <Body>
+          {/* <Title>Seminars</Title> */}
+          <Text style={{ fontSize: 20, alignSelf: "center" }}>TIENDAS</Text>
+        </Body>
+        <Right>
+          <Icon
+            name="cart"
+            onPress={() => props.navigation.navigate("MyOrders")}
+          ></Icon>
+        </Right>
       </Header>
       <View style={styles.Stores}>
         <ScrollView>
