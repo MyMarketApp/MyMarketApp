@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Image, Text, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import Button from "react-native-button";
 
 const ProfileLocation = ({ props, route, navigation }) => {
+  const { coordinates } = route.params;
   const [posIni, PosIni] = useState({
-    latitude: -12.0235422,
-    longitude: -77.0855561,
+    latitude: 0.0,
+    longitude: 0.0,
     latitudeDelta: 0.005,
     longitudeDelta: 0.005,
   });
   const [markerIni, MarkerIni] = useState({
-    latitude: -12.0235422,
-    longitude: -77.0855561,
+    latitude: 0.0,
+    longitude: 0.0,
   });
 
   useEffect(() => {
@@ -35,18 +36,28 @@ const ProfileLocation = ({ props, route, navigation }) => {
         });
       }
     }
-    getLocation();
+    if (coordinates == null) {
+      getLocation();
+    } else {
+      MarkerIni(coordinates);
+      PosIni({
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005,
+      });
+    }
   }, []);
 
   const ready = () => {
     navigation.navigate("Profile", {
-      coordinate: markerIni,
+      coordinates: markerIni,
     });
   };
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.mapStyle} initialRegion={posIni}>
+      <MapView style={styles.mapStyle} region={posIni}>
         <Marker
           draggable
           coordinate={markerIni}

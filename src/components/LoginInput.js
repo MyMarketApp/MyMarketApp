@@ -29,6 +29,7 @@ const LoginInput = (props) => {
       <View style={styles.InputRow}>
         {/* <Entypo style={styles.Icon} name="lock" size={24} color="black" /> */}
         <TextInput
+          secureTextEntry={true}
           style={styles.button}
           placeholder="Contraseña"
           onChangeText={getPassword}

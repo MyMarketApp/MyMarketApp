@@ -90,6 +90,7 @@ const Register = ({ props, route, navigation }) => {
       <View style={styles.InputRow}>
         {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
         <TextInput
+          secureTextEntry={true}
           style={styles.button}
           placeholder="Contraseña"
           onChangeText={(password) => Password(password)}

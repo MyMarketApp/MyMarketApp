@@ -4,23 +4,10 @@ import Button from "react-native-button";
 import LoginInput from "../components/LoginInput";
 import ajax from "../services/Routes";
 import * as Google from "expo-google-app-auth";
-import { connect } from "react-redux";
 const IOS_CLIENT_ID =
   "421984500214-2v08hjd6s9budpcfdhpblt7dfae90thu.apps.googleusercontent.com";
 const ANDROID_CLIENT_ID =
   "421984500214-mas44cslkk85en2g7vvo9qeo20gtoloh.apps.googleusercontent.com";
-
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    setUser: (user) => dispatch({ type: "SetUser", user }),
-  };
-}
 
 const Login = (props) => {
   const signInWithGoogle = async () => {
@@ -34,20 +21,18 @@ const Login = (props) => {
       if (result.type === "success") {
         const verifyUser = await ajax.verifyUser(result.user.email);
         if (verifyUser.status) {
-          props.setUser(verifyUser.body);
           props.navigation.navigate("Main", { user: verifyUser.body });
         } else {
           const createUser = await ajax.addUser(
             result.user.email,
             null,
-            result.user.name,
+            result.user.givenName,
             result.user.familyName,
             null,
             null,
             null
           );
           if (createUser.status) {
-            setUser(createUser.body);
             props.navigation.navigate("Main", { user: verifyUser.body });
           }
         }
@@ -64,7 +49,6 @@ const Login = (props) => {
     const response = await ajax.loginUser(email, password);
     alert(response.message);
     if (response.status) {
-      setUser(response.body);
       props.navigation.navigate("Main", { user: response.body });
     }
   };
@@ -123,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

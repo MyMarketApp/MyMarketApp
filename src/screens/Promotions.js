@@ -10,11 +10,29 @@ import {
 } from "react-native";
 import Button from "react-native-button";
 import ajax from "../services/Routes";
+import { connect } from "react-redux";
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setUser: (user) => dispatch({ type: "SetUser", user }),
+  };
+}
 
 const Promotions = (props) => {
+  useEffect(() => {
+    console.log("promotions");
+    console.log(props);
+  }, []);
   return (
     <View style={styles.Promotions}>
-      <Text>Promotions</Text>
+      <Text>Promociones</Text>
+      <Text>{props.user.name}</Text>
     </View>
   );
 };
@@ -28,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Promotions;
+export default connect(mapStateToProps, mapDispatchToProps)(Promotions);

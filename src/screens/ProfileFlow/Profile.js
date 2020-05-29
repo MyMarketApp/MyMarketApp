@@ -3,7 +3,6 @@ import { StyleSheet, View, TextInput } from "react-native";
 import { connect } from "react-redux";
 import ajax from "../../services/Routes";
 import Button from "react-native-button";
-import { Container, Content, Header, Body, Icon, Left } from "native-base";
 
 function mapStateToProps(state) {
   return {
@@ -13,45 +12,48 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setUser: () => dispatch({ type: "SetUser", user: "gg" }),
+    setUser: (user) => dispatch({ type: "SetUser", user }),
   };
 }
 
-const Profile = ({ props, route, navigation }) => {
-  const [email, Email] = useState("");
-  const [password, Password] = useState("");
-  const [name, Name] = useState("");
-  const [lastName, LastName] = useState("");
-  const [phone, Phone] = useState("");
-  const [adress, Adress] = useState("");
-  const [coordinate, Coordinate] = useState(null);
+const Profile = (props) => {
+  const { route } = props;
+  const { navigation } = props;
+  const { user } = props;
+  const [email, Email] = useState(user.email);
+  const [password, Password] = useState(user.password);
+  const [name, Name] = useState(user.name);
+  const [lastName, LastName] = useState(user.lastName);
+  const [phone, Phone] = useState(user.phone);
+  const [adress, Adress] = useState(user.adress);
+  const [coordinates, Coordinates] = useState(null);
 
   useEffect(() => {
-    if (route.params?.coordinate) {
-      Coordinate(route.params?.coordinate);
+    console.log(user);
+    if (route.params?.coordinates) {
+      Coordinates(route.params?.coordinates);
     }
-  }, [route.params?.coordinate]);
+  }, [route.params?.coordinates]);
 
   const update = async () => {
-    alert("update");
-    console.log(props);
-    // const response = await ajax.updateUser(
-    //   email,
-    //   password,
-    //   name,
-    //   lastName,
-    //   phone,
-    //   coordinate,
-    //   adress
-    // );
-    // alert(response.message);
-    // if (response.status && response.body) {
-    //   // navigation.navigate("Login");
-    // } else alert("GG");
+    const response = await ajax.updateUser(
+      email,
+      password,
+      name,
+      lastName,
+      phone,
+      coordinates,
+      adress
+    );
+    console.log(response);
+    alert(response.message);
+    if (response.status && response.body) {
+      props.setUser(response.body);
+    } else alert("GG");
   };
 
-  const getCoordinate = async () => {
-    navigation.navigate("ProfileLocation");
+  const getCoordinate = () => {
+    navigation.navigate("ProfileLocation", { coordinates: user.coordinates });
   };
 
   return (
@@ -103,11 +105,13 @@ const Profile = ({ props, route, navigation }) => {
           placeholder="Celular"
           onChangeText={(phone) => Phone(phone)}
           value={phone}
+          keyboardType="number-pad"
         />
       </View>
       <View style={styles.InputRow}>
         {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
         <TextInput
+          secureTextEntry={true}
           style={styles.button}
           placeholder="Contraseña"
           onChangeText={(password) => Password(password)}

@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Image, Text, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 import Button from "react-native-button";
 
 const RegisterLocation = ({ props, route, navigation }) => {
   const [posIni, PosIni] = useState({
-    latitude: -12.0235422,
-    longitude: -77.0855561,
+    latitude: 0.0,
+    longitude: 0.0,
     latitudeDelta: 0.005,
     longitudeDelta: 0.005,
   });
   const [markerIni, MarkerIni] = useState({
-    latitude: -12.0235422,
-    longitude: -77.0855561,
+    latitude: 0.0,
+    longitude: 0.0,
   });
 
   useEffect(() => {
@@ -23,15 +23,15 @@ const RegisterLocation = ({ props, route, navigation }) => {
         alert("Permission to access location was denied");
       } else {
         let location = await Location.getCurrentPositionAsync({});
-        MarkerIni({
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-        });
         PosIni({
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
           latitudeDelta: 0.005,
           longitudeDelta: 0.005,
+        });
+        MarkerIni({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
         });
       }
     }
@@ -46,7 +46,7 @@ const RegisterLocation = ({ props, route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.mapStyle} initialRegion={posIni}>
+      <MapView style={styles.mapStyle} region={posIni}>
         <Marker
           draggable
           coordinate={markerIni}

@@ -59,4 +59,30 @@ export default {
       console.log(e);
     }
   },
+  async updateUser(
+    email,
+    password,
+    name,
+    lastName,
+    phone,
+    coordinates,
+    adress
+  ) {
+    try {
+      postRequestOptions.body = JSON.stringify({
+        email,
+        password,
+        name,
+        lastName,
+        phone,
+        coordinates,
+        adress,
+      });
+      let response = await fetch(URI + "/api/User/update", postRequestOptions);
+      let responseJsonData = await response.json();
+      return responseJsonData;
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };
