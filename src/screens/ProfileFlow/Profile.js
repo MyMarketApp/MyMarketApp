@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, TextInput } from "react-native";
+import { StyleSheet, View, TextInput, Text } from "react-native";
 import { connect } from "react-redux";
 import ajax from "../../services/Routes";
 import Button from "react-native-button";
+import { Header, Body, Right, Icon, Left } from "native-base";
 
 function mapStateToProps(state) {
   return {
@@ -58,70 +59,90 @@ const Profile = (props) => {
 
   return (
     <View style={styles.Register}>
-      <View style={styles.InputRow}>
-        {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
-        <TextInput
-          style={styles.button}
-          placeholder="Nombre"
-          onChangeText={(name) => Name(name)}
-          value={name}
-        />
-      </View>
-      <View style={styles.InputRow}>
-        {/* <Entypo style={styles.Icon} name="lock" size={24} color="black" /> */}
-        <TextInput
-          style={styles.button}
-          placeholder="Apellidos"
-          onChangeText={(lastName) => LastName(lastName)}
-          value={lastName}
-        />
-      </View>
-      <View style={styles.InputRow}>
-        {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
-        <TextInput
-          editable={false}
-          style={styles.button}
-          placeholder="Correo Electronico"
-          onChangeText={(email) => Email(email)}
-          value={email}
-        />
-      </View>
-      <View style={styles.InputRow}>
-        {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
-        <TextInput
-          style={styles.button}
-          placeholder="Direccion"
-          onChangeText={(adress) => Adress(adress)}
-          value={adress}
-        />
-        <Button style={styles.DirecctionButton} onPress={getCoordinate}>
-          MAP
-        </Button>
-      </View>
-      <View style={styles.InputRow}>
-        {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
-        <TextInput
-          style={styles.button}
-          placeholder="Celular"
-          onChangeText={(phone) => Phone(phone)}
-          value={phone}
-          keyboardType="number-pad"
-        />
-      </View>
-      <View style={styles.InputRow}>
-        {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
-        <TextInput
-          secureTextEntry={true}
-          style={styles.button}
-          placeholder="Contraseña"
-          onChangeText={(password) => Password(password)}
-          value={password}
-        />
-      </View>
-      <View style={styles.InputRow}>
-        <Button style={styles.Button} onPress={update}>
-          ACTUALIZAR
-        </Button>
+      <Header>
+        <Left>
+          <Icon
+            name="menu"
+            onPress={() => props.navigation.openDrawer()}
+          ></Icon>
+        </Left>
+        <Body>
+          {/* <Title>Seminars</Title> */}
+          <Text style={{ fontSize: 20, alignSelf: "center" }}>Perfil</Text>
+        </Body>
+        <Right>
+          <Icon
+            name="cart"
+            onPress={() => props.navigation.navigate("MyOrders")}
+          ></Icon>
+        </Right>
+      </Header>
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <View style={styles.InputRow}>
+          {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
+          <TextInput
+            style={styles.button}
+            placeholder="Nombre"
+            onChangeText={(name) => Name(name)}
+            value={name}
+          />
+        </View>
+        <View style={styles.InputRow}>
+          {/* <Entypo style={styles.Icon} name="lock" size={24} color="black" /> */}
+          <TextInput
+            style={styles.button}
+            placeholder="Apellidos"
+            onChangeText={(lastName) => LastName(lastName)}
+            value={lastName}
+          />
+        </View>
+        <View style={styles.InputRow}>
+          {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
+          <TextInput
+            editable={false}
+            style={styles.button}
+            placeholder="Correo Electronico"
+            onChangeText={(email) => Email(email)}
+            value={email}
+          />
+        </View>
+        <View style={styles.InputRow}>
+          {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
+          <TextInput
+            style={styles.button}
+            placeholder="Direccion"
+            onChangeText={(adress) => Adress(adress)}
+            value={adress}
+          />
+          <Button style={styles.DirecctionButton} onPress={getCoordinate}>
+            MAP
+          </Button>
+        </View>
+        <View style={styles.InputRow}>
+          {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
+          <TextInput
+            style={styles.button}
+            placeholder="Celular"
+            onChangeText={(phone) => Phone(phone)}
+            value={phone}
+            keyboardType="number-pad"
+          />
+        </View>
+        <View style={styles.InputRow}>
+          {/* <Ionicons style={styles.Icon} name="md-mail" size={20} color="#000" /> */}
+          <TextInput
+            secureTextEntry={true}
+            style={styles.button}
+            placeholder="Contraseña"
+            onChangeText={(password) => Password(password)}
+            value={password}
+          />
+        </View>
+        <View style={styles.InputRow}>
+          <Button style={styles.Button} onPress={update}>
+            ACTUALIZAR
+          </Button>
+        </View>
       </View>
     </View>
   );
@@ -130,8 +151,8 @@ const Profile = (props) => {
 const styles = StyleSheet.create({
   Register: {
     flex: 1,
-    backgroundColor: "#3F51B5",
-    alignItems: "center",
+    backgroundColor: "grey",
+    // alignItems: "center",
   },
   InputRow: {
     flex: 1,
