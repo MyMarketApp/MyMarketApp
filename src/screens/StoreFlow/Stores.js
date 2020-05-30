@@ -19,7 +19,6 @@ const Stores = (props) => {
   useEffect(() => {
     async function retrieveStores() {
       const response = await ajax.allStores();
-      await Stores(response.body);
     }
     retrieveStores();
   }, []);
@@ -48,7 +47,9 @@ const Stores = (props) => {
         <ScrollView>
           {stores.map((s, i) => (
             <View style={styles.Store} key={s.id}>
-              <TouchableOpacity onPress={() => console.log("buah")}>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate("Store", { store: s })}
+              >
                 <Image style={styles.Image} source={{ uri: s.imageUrl }} />
               </TouchableOpacity>
               <Text style={{ fontSize: 20, marginTop: 15 }}>{s.name}</Text>
@@ -60,7 +61,7 @@ const Stores = (props) => {
                   })
                 }
               >
-                <Text style={{ color: "grey" }}>{s.direction}</Text>
+                <Text style={{ color: "grey" }}>{s.adress}</Text>
               </TouchableOpacity>
             </View>
           ))}

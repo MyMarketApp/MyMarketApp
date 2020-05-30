@@ -85,4 +85,16 @@ export default {
       console.log(e);
     }
   },
+  async storeProducts(id) {
+    try {
+      let response = await fetch(
+        URI + "/api/Store/" + id + "/products",
+        getRequestOptions
+      );
+      let responseJsonData = await response.json();
+      return responseJsonData;
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };

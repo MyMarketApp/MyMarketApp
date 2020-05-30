@@ -1,6 +1,7 @@
 import React from "react";
 import Stores from "./Stores";
 import StoresLocation from "./StoresLocation";
+import Store from "./Store";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -18,6 +19,13 @@ function StoreFlow() {
       <Stack.Screen
         name="StoresLocation"
         component={StoresLocation}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Store"
+        component={Store}
         options={{
           headerShown: false,
         }}
