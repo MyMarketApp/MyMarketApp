@@ -3,12 +3,7 @@ import { View, Text, Image } from "react-native";
 import { DrawerItemList } from "@react-navigation/drawer";
 import { Container, Content, Header, Body, Icon } from "native-base";
 import { connect } from "react-redux";
-
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-  };
-}
+import { mapStateToProps, mapDispatchToProps } from "../components/Redux";
 
 const MainSidebar = (props) => {
   const { user } = props;

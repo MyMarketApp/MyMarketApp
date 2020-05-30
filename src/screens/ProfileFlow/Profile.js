@@ -4,18 +4,7 @@ import { connect } from "react-redux";
 import ajax from "../../services/Routes";
 import Button from "react-native-button";
 import { Header, Body, Right, Icon, Left } from "native-base";
-
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    setUser: (user) => dispatch({ type: "SetUser", user }),
-  };
-}
+import { mapStateToProps, mapDispatchToProps } from "../../components/Redux";
 
 const Profile = (props) => {
   const { route } = props;

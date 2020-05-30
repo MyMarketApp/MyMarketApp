@@ -11,11 +11,15 @@ import {
 import { Container, Content, Header, Body, Icon, Left } from "native-base";
 import Button from "react-native-button";
 import ajax from "../services/Routes";
+import { connect } from "react-redux";
+import { mapStateToProps, mapDispatchToProps } from "../components/Redux";
 
 const MyOrders = (props) => {
+  const { count } = props;
   return (
     <View style={styles.MyOrders}>
       <Text>MyOrders</Text>
+      <Text>{count}</Text>
     </View>
   );
 };
@@ -29,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyOrders;
+export default connect(mapStateToProps, mapDispatchToProps)(MyOrders);

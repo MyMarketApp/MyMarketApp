@@ -18,23 +18,28 @@ const Main = (props) => {
 
   const initialState = {
     user: user,
+    count: 0,
   };
 
   const reducer = (state = initialState, action) => {
     switch (action.type) {
       case "SetUser":
-        return { user: action.user };
+        return {
+          ...state,
+          user: action.user,
+        };
+      case "addToCart":
+        return {
+          ...state,
+          count: state.count + 1,
+        };
     }
     return state;
   };
 
   const store = createStore(reducer);
 
-  useEffect(() => {
-    //   console.log("Main");
-    //   console.log(store);
-    //   console.log(props);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <Provider store={store}>
       <NavigationContainer independent={true}>

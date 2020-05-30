@@ -19,6 +19,7 @@ const Stores = (props) => {
   useEffect(() => {
     async function retrieveStores() {
       const response = await ajax.allStores();
+      Stores(response.body);
     }
     retrieveStores();
   }, []);

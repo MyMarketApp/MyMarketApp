@@ -14,17 +14,25 @@ import {
 import Button from "react-native-button";
 import ajax from "../../services/Routes";
 import { Header, Body, Right, Icon, Left } from "native-base";
+import { connect } from "react-redux";
+import { mapStateToProps, mapDispatchToProps } from "../../components/Redux";
 
 const Stores = (props) => {
+  const { count } = props;
   const { store } = props.route.params;
   const [products, Products] = useState([]);
   useEffect(() => {
+    console.log(props);
     async function retrieveProducts() {
       const response = await ajax.storeProducts(store.id);
       Products(response.body);
     }
     retrieveProducts();
   }, []);
+
+  const addProduct = () => {
+    props.addToCart();
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -41,6 +49,23 @@ const Stores = (props) => {
           </Text>
         </Body>
         <Right>
+          <View
+            style={{
+              position: "relative",
+              height: 25,
+              width: 25,
+              borderRadius: 15,
+              backgroundColor: "rgba(95,197,123,0.8)",
+              right: 0,
+              botton: 0,
+              top: 0,
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 2000,
+            }}
+          >
+            <Text style={{ color: "white", fontWeight: "bold" }}>{count}</Text>
+          </View>
           <Icon
             name="cart"
             onPress={() => props.navigation.navigate("MyOrders")}
@@ -63,9 +88,17 @@ const Stores = (props) => {
                 </TouchableOpacity>
                 <Text style={{ fontSize: 20, marginTop: 15 }}>{item.name}</Text>
                 <Text style={{ color: "grey" }}>{item.description}</Text>
-                <Text style={{ color: "black", fontSize: 20 }}>
-                  S/.{item.price}
-                </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text style={{ color: "black", fontSize: 20 }}>
+                    S/.{item.price}
+                  </Text>
+                  <Icon name="add-circle" onPress={addProduct}></Icon>
+                </View>
               </View>
             </View>
           )}
@@ -94,4 +127,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Stores;
+export default connect(mapStateToProps, mapDispatchToProps)(Stores);
