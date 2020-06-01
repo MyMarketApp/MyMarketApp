@@ -119,4 +119,17 @@ export default {
       console.log(e);
     }
   },
+
+  async deleteOrder(id) {
+    try {
+      let response = await fetch(
+        URI + "/api/Order/" + id + "/delete",
+        getRequestOptions
+      );
+      let responseJsonData = await response.json();
+      return responseJsonData;
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };

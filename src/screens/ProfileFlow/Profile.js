@@ -35,7 +35,6 @@ const Profile = (props) => {
       coordinates,
       adress
     );
-    console.log(response);
     alert(response.message);
     if (response.status && response.body) {
       props.setUser(response.body);

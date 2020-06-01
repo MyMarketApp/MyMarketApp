@@ -25,10 +25,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const Promotions = (props) => {
-  useEffect(() => {
-    console.log("promotions");
-    console.log(props);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <View style={styles.Promotions}>
       <Text>Promociones</Text>

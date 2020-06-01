@@ -34,14 +34,16 @@ const MyOrders = (props) => {
     });
   }, []);
   const remove = async (index) => {
-    // const response = await ajax.addOrder(1, store.id, idProduct, 1, user.id);
-    // alert(response.message);
-    // if (response.status) props.addToCart();
-    SubTotal(
-      (subTotal) =>
-        subTotal - orders[index].quantity * orders[index].product.price
-    );
-    orders.splice(index, 1);
+    const response = await ajax.deleteOrder(orders[index].id);
+    alert(response.message);
+    if (response.status) {
+      props.removeFromCart();
+      SubTotal(
+        (subTotal) =>
+          subTotal - orders[index].quantity * orders[index].product.price
+      );
+      orders.splice(index, 1);
+    }
   };
   return (
     <View style={{ flex: 1 }}>

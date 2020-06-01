@@ -15,10 +15,10 @@ const Drawer = createDrawerNavigator();
 
 const Main = (props) => {
   const { user } = props.route.params;
-
+  const { orders } = user;
   const initialState = {
     user: user,
-    count: 0,
+    count: orders.length,
   };
 
   const reducer = (state = initialState, action) => {
@@ -32,6 +32,11 @@ const Main = (props) => {
         return {
           ...state,
           count: state.count + 1,
+        };
+      case "removeFromCart":
+        return {
+          ...state,
+          count: state.count - 1,
         };
     }
     return state;
