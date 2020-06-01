@@ -19,10 +19,10 @@ import { mapStateToProps, mapDispatchToProps } from "../../components/Redux";
 
 const Stores = (props) => {
   const { count } = props;
+  const { user } = props;
   const { store } = props.route.params;
   const [products, Products] = useState([]);
   useEffect(() => {
-    console.log(props);
     async function retrieveProducts() {
       const response = await ajax.storeProducts(store.id);
       Products(response.body);
@@ -30,8 +30,10 @@ const Stores = (props) => {
     retrieveProducts();
   }, []);
 
-  const addProduct = () => {
-    props.addToCart();
+  const addProduct = async (idProduct) => {
+    const response = await ajax.addOrder(1, store.id, idProduct, 1, user.id);
+    alert(response.message);
+    if (response.status) props.addToCart();
   };
 
   return (
@@ -97,7 +99,10 @@ const Stores = (props) => {
                   <Text style={{ color: "black", fontSize: 20 }}>
                     S/.{item.price}
                   </Text>
-                  <Icon name="add-circle" onPress={addProduct}></Icon>
+                  <Icon
+                    name="add-circle"
+                    onPress={() => addProduct(item.id)}
+                  ></Icon>
                 </View>
               </View>
             </View>

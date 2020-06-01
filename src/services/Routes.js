@@ -19,6 +19,7 @@ export default {
       console.log(e);
     }
   },
+
   async loginUser(email, password) {
     try {
       postRequestOptions.body = JSON.stringify({ email, password });
@@ -29,6 +30,7 @@ export default {
       console.log(e);
     }
   },
+
   async verifyUser(email) {
     try {
       let response = await fetch(
@@ -41,6 +43,7 @@ export default {
       console.log(e);
     }
   },
+
   async addUser(email, password, name, lastName, phone, coordinates, adress) {
     try {
       postRequestOptions.body = JSON.stringify({
@@ -59,6 +62,7 @@ export default {
       console.log(e);
     }
   },
+
   async updateUser(
     email,
     password,
@@ -85,12 +89,30 @@ export default {
       console.log(e);
     }
   },
+
   async storeProducts(id) {
     try {
       let response = await fetch(
         URI + "/api/Store/" + id + "/products",
         getRequestOptions
       );
+      let responseJsonData = await response.json();
+      return responseJsonData;
+    } catch (e) {
+      console.log(e);
+    }
+  },
+
+  async addOrder(quantity, idStore, idProduct, idState, idUser) {
+    try {
+      postRequestOptions.body = JSON.stringify({
+        quantity,
+        idStore,
+        idProduct,
+        idState,
+        idUser,
+      });
+      let response = await fetch(URI + "/api/Order/add", postRequestOptions);
       let responseJsonData = await response.json();
       return responseJsonData;
     } catch (e) {
