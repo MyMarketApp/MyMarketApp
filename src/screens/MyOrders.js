@@ -24,25 +24,23 @@ import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "../components/Redux";
 
 const MyOrders = (props) => {
-  const [subTotal, SubTotal] = useState(0);
-  const { orders } = props.user;
-  useEffect(() => {
+  const { orders } = props;
+
+  useEffect(() => {}, []);
+
+  const subTotal = () => {
+    let subTotal = 0;
     orders.forEach((element) => {
-      SubTotal(
-        (subTotal) => subTotal + element.quantity * element.product.price
-      );
+      subTotal = subTotal + element.quantity * element.product.price;
     });
-  }, []);
+    return subTotal;
+  };
+
   const remove = async (index) => {
     const response = await ajax.deleteOrder(orders[index].id);
     alert(response.message);
     if (response.status) {
-      props.removeFromCart();
-      SubTotal(
-        (subTotal) =>
-          subTotal - orders[index].quantity * orders[index].product.price
-      );
-      orders.splice(index, 1);
+      props.removeOrder(index);
     }
   };
   return (
@@ -118,7 +116,7 @@ const MyOrders = (props) => {
           }}
         >
           <Text style={{ fontSize: 24 }}>SubTotal</Text>
-          <Text style={{ fontSize: 24 }}>S/.{subTotal}</Text>
+          <Text style={{ fontSize: 24 }}>S/.{subTotal()}</Text>
         </View>
         <View
           style={{
@@ -140,7 +138,7 @@ const MyOrders = (props) => {
           }}
         >
           <Text style={{ fontSize: 24 }}>Total</Text>
-          <Text style={{ fontSize: 24 }}>S/.{subTotal + 2.0}</Text>
+          <Text style={{ fontSize: 24 }}>S/.{subTotal() + 2.0}</Text>
         </View>
         <Button
           style={styles.Button}

@@ -19,7 +19,6 @@ const Profile = (props) => {
   const [coordinates, Coordinates] = useState(null);
 
   useEffect(() => {
-    console.log(user);
     if (route.params?.coordinates) {
       Coordinates(route.params?.coordinates);
     }

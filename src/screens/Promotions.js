@@ -11,25 +11,18 @@ import {
 import Button from "react-native-button";
 import ajax from "../services/Routes";
 import { connect } from "react-redux";
-
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    setUser: (user) => dispatch({ type: "SetUser", user }),
-  };
-}
+import { mapStateToProps, mapDispatchToProps } from "../components/Redux";
 
 const Promotions = (props) => {
-  useEffect(() => {}, []);
+  const { orders } = props;
+  useEffect(() => {
+    console.log("Promotions");
+  }, []);
   return (
     <View style={styles.Promotions}>
       <Text>Promociones</Text>
       <Text>{props.user.name}</Text>
+      <Text>{orders.length}</Text>
     </View>
   );
 };

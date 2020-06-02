@@ -1,15 +1,18 @@
 function mapStateToProps(state) {
   return {
     user: state.user,
-    count: state.count,
+    orders: state.orders,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     setUser: (user) => dispatch({ type: "SetUser", user }),
-    addToCart: () => dispatch({ type: "addToCart" }),
-    removeFromCart: () => dispatch({ type: "removeFromCart" }),
+    setOrders: (orders) => dispatch({ type: "SetOrders", orders }),
+    removeOrder: (index) => dispatch({ type: "RemoveOrder", index }),
+    addOrder: (order) => dispatch({ type: "AddOrder", order }),
+    updateOrder: (id, quantity) =>
+      dispatch({ type: "UpdateOrder", id, quantity }),
   };
 }
 

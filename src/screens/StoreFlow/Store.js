@@ -16,12 +16,14 @@ import ajax from "../../services/Routes";
 import { Header, Body, Right, Icon, Left } from "native-base";
 import { connect } from "react-redux";
 import { mapStateToProps, mapDispatchToProps } from "../../components/Redux";
+import MyOrders from "../MyOrders";
 
 const Stores = (props) => {
-  const { count } = props;
   const { user } = props;
+  const { orders } = props;
   const { store } = props.route.params;
   const [products, Products] = useState([]);
+
   useEffect(() => {
     async function retrieveProducts() {
       const response = await ajax.storeProducts(store.id);
@@ -33,7 +35,11 @@ const Stores = (props) => {
   const addProduct = async (idProduct) => {
     const response = await ajax.addOrder(1, store.id, idProduct, 1, user.id);
     alert(response.message);
-    if (response.status) props.addToCart();
+    if (response.status) {
+      if (response.message.includes("Order Created"))
+        props.addOrder(response.body);
+      else props.updateOrder(response.body.id, response.body.quantity);
+    }
   };
 
   return (
@@ -66,7 +72,9 @@ const Stores = (props) => {
               zIndex: 2000,
             }}
           >
-            <Text style={{ color: "white", fontWeight: "bold" }}>{count}</Text>
+            <Text style={{ color: "white", fontWeight: "bold" }}>
+              {orders.length}
+            </Text>
           </View>
           <Icon
             name="cart"
@@ -75,7 +83,6 @@ const Stores = (props) => {
         </Right>
       </Header>
       <View style={styles.Stores}>
-        {/* <ScrollView> */}
         <FlatList
           data={products}
           horizontal={false}

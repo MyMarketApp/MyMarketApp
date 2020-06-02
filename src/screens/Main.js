@@ -18,7 +18,7 @@ const Main = (props) => {
   const { orders } = user;
   const initialState = {
     user: user,
-    count: orders.length,
+    orders: orders,
   };
 
   const reducer = (state = initialState, action) => {
@@ -28,15 +28,28 @@ const Main = (props) => {
           ...state,
           user: action.user,
         };
-      case "addToCart":
+      case "SetOrders":
         return {
           ...state,
-          count: state.count + 1,
+          orders: action.orders,
         };
-      case "removeFromCart":
+      case "RemoveOrder":
         return {
           ...state,
-          count: state.count - 1,
+          orders: state.orders.filter((order, i) => i != action.index),
+        };
+      case "AddOrder":
+        return {
+          ...state,
+          orders: [...state.orders, action.order],
+        };
+      case "UpdateOrder":
+        return {
+          ...state,
+          orders: state.orders.map((order) => {
+            if (order.id == action.id) order.quantity = action.quantity;
+            return order;
+          }),
         };
     }
     return state;
@@ -44,7 +57,9 @@ const Main = (props) => {
 
   const store = createStore(reducer);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // console.log(orders);
+  }, []);
   return (
     <Provider store={store}>
       <NavigationContainer independent={true}>
